@@ -8,9 +8,9 @@ const pool = require("../lib/db");
  * @return {Object} The response object with the status and data.
  */
 exports.createTask = (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, userId, statusId } = req.body;
 
-  if (!title) {
+  if ((!title, !description, !userId, !statusId)) {
     return res
       .status(400)
       .json({ message: "Please provide valid data for the new Task" });
@@ -25,25 +25,29 @@ exports.createTask = (req, res) => {
     }
 
     const query =
-      "INSERT INTO `trello_task` (`title`, `description`) VALUES (?, ?)";
+      "INSERT INTO `trello_task` (`title`, `description`, `assigned_user_id`, `status_id`) VALUES (?, ?, ?, ?)";
 
-    connection.query(query, [title, description], (error, result) => {
-      connection.release();
+    connection.query(
+      query,
+      [title, description, userId, statusId],
+      (error, result) => {
+        connection.release();
 
-      if (error) {
-        return res.status(500).json({
-          message: "Something went wrong with our app or servers",
-          error,
+        if (error) {
+          return res.status(500).json({
+            message: "Something went wrong with our app or servers",
+            error,
+          });
+        }
+
+        const lastInsertedId = result.insertId;
+
+        return res.status(201).json({
+          message: `Task ${title} is successfully created.`,
+          task_id: lastInsertedId,
         });
       }
-
-      const lastInsertedId = result.insertId;
-
-      return res.status(201).json({
-        message: `Task ${title} is successfully created.`,
-        task_id: lastInsertedId,
-      });
-    });
+    );
   });
 };
 

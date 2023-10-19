@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `trello_task` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `assigned_user_id` int DEFAULT NULL,
-  `status_id` int DEFAULT NULL,
+  `assigned_user_id` int NOT NULL,
+  `status_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `assigned_user_id` (`assigned_user_id`),
   KEY `status_id` (`status_id`)
