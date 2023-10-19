@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: ".env.local" });
 
 // Access the port variable from .env.local
-const envPort = process.env.PORT || 3000;
+const envPort = process.env.PORT;
 
 /**
  * Normalize the given port value.
@@ -60,7 +60,7 @@ server.on("error", errorHandler);
 server.on("listening", () => {
   const address = server.address();
   const bind = typeof address === "string" ? `pipe ${address}` : `port ${port}`;
-  console.log(`Listening on ${bind} -> ${process.env.PORT}`);
+  console.log(`Listening on ${bind}`);
 });
 
 server.listen(port);
