@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `skylead_test`
+-- Database: `test`
 --
-CREATE DATABASE IF NOT EXISTS `skylead_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-USE `skylead_test`;
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+USE `test`;
 
 -- --------------------------------------------------------
 
